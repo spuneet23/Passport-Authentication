@@ -6,7 +6,7 @@ var expressValidator = require('express-validator');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var exphbs = require('express-handlebars');
-var falsh = require('connect-flash');
+var flash = require('connect-flash');
 var routes = require('./routes/index');
 var session = require('express-session');
 var passport = require('passport');
@@ -38,8 +38,9 @@ app.use(session({
 
 app.use(require('connect-flash')());
 app.use(function (req, res, next) {
+  res.locals.user = req.user || null;
   res.locals.messages = require('express-messages')(req, res);
-  next();
+   next();
 });
 
 app.use(expressValidator({
@@ -58,6 +59,10 @@ app.use(expressValidator({
     };
   }
 }));
+
+// Passport Initialize
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/', routes);
 

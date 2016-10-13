@@ -15,7 +15,13 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Passport Login</a>
+          {{#if user}}
+             <a class="navbar-brand" href="#">Passport System</a>
+            {{else}}
+
+             <a class="navbar-brand" href="#">Passport Login </a>
+          {{/if}}
+
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav navbar-right">
@@ -28,7 +34,7 @@
 
     {{#if errors}}
       {{#each errors}}
-        {{msg}}
+        <div class="alert alert-success col-md-6 col-md-offset-3">{{msg}}</div>
       {{/each}}
     {{/if}}
 
